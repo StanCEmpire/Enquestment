@@ -2,17 +2,15 @@ package stancempire.enquestment.network.packets;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.neoforged.neoforge.network.NetworkEvent;
-import stancempire.enquestment.client.ClientPacketManager;
+import net.neoforged.neoforge.network.PacketDistributor;
+import stancempire.enquestment.network.NetworkManager;
 import stancempire.enquestment.network.util.ModScreen;
 
-import java.util.function.Supplier;
-
-public class CBOpenGui
+public class SBRequestOpenGui
 {
 
     private ModScreen screen;
-    //Constructor for sending messages
-    public CBOpenGui(ModScreen pScreen)
+    public SBRequestOpenGui(ModScreen pScreen)
     {
 
         this.screen = pScreen;
@@ -28,7 +26,7 @@ public class CBOpenGui
     }
 
     //Decode
-    public CBOpenGui(FriendlyByteBuf buf)
+    public SBRequestOpenGui(FriendlyByteBuf buf)
     {
 
         this.screen = buf.readEnum(ModScreen.class);
@@ -45,12 +43,13 @@ public class CBOpenGui
             if(this.screen != null)
             {
 
-                ClientPacketManager.openGui(this.screen);
+                NetworkManager.NETWORK_INSTANCE.send(PacketDistributor.PLAYER.with(ctx::getSender), new CBOpenGui(this.screen));
 
             }
 
         });
 
     }
+
 
 }

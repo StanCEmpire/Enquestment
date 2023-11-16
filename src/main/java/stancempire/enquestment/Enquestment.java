@@ -5,9 +5,12 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import stancempire.enquestment.client.ClientSetup;
+import stancempire.enquestment.events.UserEvents;
+import stancempire.enquestment.network.NetworkManager;
 
 @Mod(Enquestment.MOD_ID)
 public class Enquestment
@@ -21,14 +24,17 @@ public class Enquestment
     {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modBus.addListener(this::onCommonSetup);
+        IEventBus eventBus = NeoForge.EVENT_BUS;
 
+        modBus.addListener(this::onCommonSetup);
         if(FMLEnvironment.dist.isClient())
         {
 
-            modBus.addListener(ClientSetup::onClientSetup);
+            modBus.register(new ClientSetup());
 
         }
+
+        eventBus.register(new UserEvents());
 
     }
 
@@ -39,7 +45,7 @@ public class Enquestment
         {
 
             LOGGER.info("Common Setup");
-            //COMMON SETUP
+            NetworkManager.registerMessages();
 
         });
 
