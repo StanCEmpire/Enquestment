@@ -11,9 +11,16 @@ import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 import stancempire.enquestment.Enquestment;
 
+/**
+ * <p>CLIENT CODE</p>
+ * Class for handling client-specific setup events.
+ */
 public class ClientSetup
 {
 
+    /**
+     * Event for basic client setup tasks
+     */
     @SubscribeEvent
     public void onClientSetup(final FMLClientSetupEvent event)
     {
@@ -22,14 +29,18 @@ public class ClientSetup
         {
 
             Enquestment.LOGGER.info("Client Setup");
-            //CLIENT SETUPM
+            //CLIENT SETUP
 
         });
 
     }
 
+    //Declare key mappings
     public static final Lazy<KeyMapping> EMENU_KEY = Lazy.of(() -> new KeyMapping("key.enquestment.emenu", KeyConflictContext.IN_GAME, KeyModifier.ALT, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_E, "key.categories.misc"));
 
+    /**
+     * Event for registering custom keybinds
+     */
     @SubscribeEvent
     public void registerKeybinds(RegisterKeyMappingsEvent event)
     {

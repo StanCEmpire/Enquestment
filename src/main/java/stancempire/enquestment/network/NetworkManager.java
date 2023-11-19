@@ -7,12 +7,18 @@ import stancempire.enquestment.Enquestment;
 import stancempire.enquestment.network.packets.CBOpenGui;
 import stancempire.enquestment.network.packets.SBRequestOpenGui;
 
+/**
+ * Class for managing the Mod's SimpleChannel instance and registering packets
+ */
 public class NetworkManager
 {
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel NETWORK_INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(Enquestment.MOD_ID, "network"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
+    /**
+     * Register packets
+     */
     public static void registerMessages()
     {
 

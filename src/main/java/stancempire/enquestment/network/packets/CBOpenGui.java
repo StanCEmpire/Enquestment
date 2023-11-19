@@ -2,16 +2,19 @@ package stancempire.enquestment.network.packets;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.neoforged.neoforge.network.NetworkEvent;
-import stancempire.enquestment.client.ClientPacketManager;
+import stancempire.enquestment.client.ClientPacketHandler;
 import stancempire.enquestment.network.util.ModScreen;
 
-import java.util.function.Supplier;
-
+/**
+ * Instructs the client to display a certain GUI
+ */
 public class CBOpenGui
 {
 
     private ModScreen screen;
-    //Constructor for sending messages
+    /**
+     * Constructor for initialising the packet on the server
+     */
     public CBOpenGui(ModScreen pScreen)
     {
 
@@ -19,7 +22,9 @@ public class CBOpenGui
 
     }
 
-    //Encode
+    /**
+     * Encodes data to the packet
+     */
     public void encode(FriendlyByteBuf buf)
     {
 
@@ -27,7 +32,9 @@ public class CBOpenGui
 
     }
 
-    //Decode
+    /**
+     * Constructor for decoding data on the client
+     */
     public CBOpenGui(FriendlyByteBuf buf)
     {
 
@@ -35,7 +42,9 @@ public class CBOpenGui
 
     }
 
-    //Handle
+    /**
+     * Handles packet once recieved by the client
+     */
     public void handle(NetworkEvent.Context ctx)
     {
 
@@ -45,7 +54,7 @@ public class CBOpenGui
             if(this.screen != null)
             {
 
-                ClientPacketManager.openGui(this.screen);
+                ClientPacketHandler.openGui(this.screen);
 
             }
 

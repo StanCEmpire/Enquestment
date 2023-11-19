@@ -6,10 +6,16 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import stancempire.enquestment.network.NetworkManager;
 import stancempire.enquestment.network.util.ModScreen;
 
+/**
+ * Sends a request to the server to return a CBOpenGui packet
+ */
 public class SBRequestOpenGui
 {
 
     private ModScreen screen;
+    /**
+     * Constructor for initialising the packet on the client
+     */
     public SBRequestOpenGui(ModScreen pScreen)
     {
 
@@ -17,7 +23,9 @@ public class SBRequestOpenGui
 
     }
 
-    //Encode
+    /**
+     * Encodes data to the packet
+     */
     public void encode(FriendlyByteBuf buf)
     {
 
@@ -25,7 +33,9 @@ public class SBRequestOpenGui
 
     }
 
-    //Decode
+    /**
+     * Constructor for decoding data on the server
+     */
     public SBRequestOpenGui(FriendlyByteBuf buf)
     {
 
@@ -33,7 +43,9 @@ public class SBRequestOpenGui
 
     }
 
-    //Handle
+    /**
+     * Handles packet once recieved by the server
+     */
     public void handle(NetworkEvent.Context ctx)
     {
 
